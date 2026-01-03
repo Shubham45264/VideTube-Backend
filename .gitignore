@@ -1,0 +1,11 @@
+node_modules/
+.env
+dist/
+coverage/
+logs/
+npm-debug.log*
+yarn-error.log*
+Public/temp/
+Public/uploads/
+uploads/
+temp/

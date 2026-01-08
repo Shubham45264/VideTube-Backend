@@ -1,26 +1,29 @@
-# Project Requirements Document (PRD): VidTube Backend
+# VidTube Backend – Project Requirements Document (PRD)
 
-## 1. Project Overview
-**VidTube** is a complex backend application designed to mimic the core functionalities of a video-sharing platform like YouTube. It provides a robust API for managing users, videos, subscriptions, playlists, and social interactions (comments, likes, tweets).
+## 📌 Project Overview
 
-The goal of this project is to build a scalable, secure, and performant backend using modern web technologies and best practices in Node.js development.
+**VidTube** is a scalable and production-grade backend application inspired by video-sharing platforms like YouTube. It exposes a robust REST API to manage users, videos, subscriptions, playlists, and social interactions such as comments, likes, and creator posts.
 
----
-
-## 2. Technology Stack
-- **Runtime Environment:** Node.js
-- **Web Framework:** Express.js (v5+)
-- **Database:** MongoDB
-- **ORM/ODM:** Mongoose
-- **Authentication:** JSON Web Tokens (JWT) & Bcrypt.js
-- **File Handling:** Multer
-- **Media Management:** Cloudinary
-- **Code Styling:** Prettier & ESLint
+The primary goal of this project is to design a **secure, performant, and maintainable backend** using modern Node.js development practices and scalable architecture patterns.
 
 ---
 
-## 3. Environment Setup
-To run this project locally, create a `.env` file in the root directory and add the following variables:
+## 🛠️ Technology Stack
+
+* **Runtime:** Node.js
+* **Framework:** Express.js (v5+)
+* **Database:** MongoDB
+* **ODM:** Mongoose
+* **Authentication:** JWT (Access & Refresh Tokens), Bcrypt.js
+* **File Uploads:** Multer
+* **Media Storage & CDN:** Cloudinary
+* **Code Quality:** ESLint, Prettier
+
+---
+
+## ⚙️ Environment Setup
+
+Create a `.env` file in the project root and configure the following variables:
 
 ```env
 PORT=8000
@@ -38,92 +41,133 @@ CLOUDINARY_API_SECRET=your_api_secret
 
 ---
 
-## 4. Core Features & Functional Requirements
+## 🚀 Core Features & Functional Requirements
 
-### 4.1 User Management
-- **Authentication:** Secure registration and login using JWT.
-- **Profile Management:** Update avatars, cover images, and account details.
-- **Watch History:** Track videos watched by the user.
-- **Security:** Password hashing and secure cookie-based session management.
+### 👤 User Management
 
-### 4.2 Video Management
-- **Upload & Processing:** Support for video uploads with title, description, and thumbnail (via Cloudinary).
-- **Control:** Publish/Unpublish videos, edit video metadata, and delete videos.
-- **Search & Discovery:** Search, sort, and paginate videos using advanced aggregation pipelines.
-
-### 4.3 Subscription System
-- **Follow/Unfollow:** Users can subscribe to channels.
-- **Subscriber Count:** Real-time tracking of channel subscribers and subbed channels.
-
-### 4.4 Social Interactions
-- **Tweets:** Short text-based posts for channel updates.
-- **Comments:** Add, edit, and delete comments on videos.
-- **Likes:** Like/dislike videos, comments, and tweets.
-
-### 4.5 Playlist Management
-- **Curation:** Create, update, and delete private or public playlists.
-- **Organize:** Add or remove videos from playlists.
-
-### 4.6 Dashboard
-- **Analytics:** For content creators to view total video views, subscribers, and likes.
-- **Management:** A centralized view of all uploaded content.
+* Secure user registration and login using JWT authentication
+* Profile customization (avatar, cover image, account details)
+* Watch history tracking
+* Encrypted password storage and secure session handling
 
 ---
 
-## 5. System Architecture
+### 🎥 Video Management
 
-### 5.1 Folder Structure
-- `src/controllers/`: Contains the logic for processing requests and returning responses.
-- `src/models/`: Defines the data structure using Mongoose schemas.
-- `src/routes/`: Map URI paths to specific controller functions.
-- `src/middlewares/`: Functions that run during the request-response cycle (Auth, Upload, etc.).
-- `src/utils/`: Helper classes for handling API responses, errors, and Cloudinary uploads.
-- `src/db/`: Connection logic for MongoDB.
-
-### 4.2 Data Models
-- **User:** name, email, password, avatar, coverImage, watchHistory.
-- **Video:** videoFile, thumbnail, title, duration, views, owner.
-- **Comment:** content, video, owner.
-- **Like:** video/comment/tweet, likedBy.
-- **Playlist:** name, description, videos, owner.
-- **Subscription:** subscriber, channel.
-- **Tweet:** content, owner.
+* Upload videos with metadata (title, description, thumbnail)
+* Cloudinary-based media storage and optimization
+* Publish / unpublish videos
+* Update or delete uploaded videos
+* Advanced search, sorting, and pagination using aggregation pipelines
 
 ---
 
-## 6. Key Implementation Details
+### 🔔 Subscription System
 
-### 6.1 Advanced Aggregation
-Utilizes Mongoose aggregation pipelines for complex data fetching:
-- Calculating subscriber counts and subscription status.
-- Generating user channel profiles.
-- Implementing efficient paginated search results for videos.
-
-### 6.2 Middleware Architecture
-- **Auth Middleware:** Verifies JWT and injects the user object into requests.
-- **Multer Middleware:** Handles multi-part form data for file uploads before sending to Cloudinary.
-- **Global Error Handler:** Standardized error response format across the entire API.
-
-### 6.3 Media Optimization
-- Integration with Cloudinary for automatic image and video optimization, resizing, and CDN delivery.
+* Subscribe and unsubscribe from channels
+* Real-time subscriber and subscription counts
+* Channel relationship management
 
 ---
 
-## 7. API Endpoints (v1)
-- `/api/v1/users`: Auth and profile.
-- `/api/v1/videos`: Video CRUD and search.
-- `/api/v1/subscriptions`: Channel following logic.
-- `/api/v1/comments`: Video commenting.
-- `/api/v1/likes`: Like/Dislike logic.
-- `/api/v1/playlist`: Playlist management.
-- `/api/v1/tweets`: Content creator updates.
-- `/api/v1/dashboard`: Creator stats.
-- `/api/v1/healthcheck`: System status.
+### 💬 Social Interactions
+
+* Creator posts (Tweets)
+* Comment system for videos
+* Like / dislike functionality for videos, comments, and tweets
 
 ---
 
-## 8. Future Roadmap
-- Implementation of a real-time notification system (Socket.io).
-- Advanced video recommendation algorithms.
-- Category and Tag-based discovery systems.
-- Multi-tier subscription models.
+### 📂 Playlist Management
+
+* Create public or private playlists
+* Add or remove videos from playlists
+* Update playlist metadata
+
+---
+
+### 📊 Creator Dashboard
+
+* View total views, subscribers, and likes
+* Centralized management of uploaded content
+* Creator-focused analytics overview
+
+---
+
+## 🧱 System Architecture
+
+### 📁 Folder Structure
+
+```
+src/
+├── controllers/   # Business logic & request handlers
+├── models/        # Mongoose schemas
+├── routes/        # API route definitions
+├── middlewares/   # Auth, uploads, validation, etc.
+├── utils/         # Helpers (Cloudinary, responses, errors)
+├── db/            # Database connection logic
+```
+
+---
+
+### 📦 Data Models
+
+* **User:** name, email, password, avatar, coverImage, watchHistory
+* **Video:** videoFile, thumbnail, title, duration, views, owner
+* **Comment:** content, video, owner
+* **Like:** target (video/comment/tweet), likedBy
+* **Playlist:** name, description, videos, owner
+* **Subscription:** subscriber, channel
+* **Tweet:** content, owner
+
+---
+
+## 🧠 Key Implementation Details
+
+### 🔍 Advanced Aggregation Pipelines
+
+* Subscriber count calculations
+* Subscription status checks
+* Channel profile generation
+* Optimized video discovery and pagination
+
+---
+
+### 🧩 Middleware Architecture
+
+* **Authentication Middleware:** JWT verification and user injection
+* **Upload Middleware:** Multipart file handling via Multer
+* **Global Error Handler:** Consistent API error responses
+
+---
+
+### 🖼️ Media Optimization
+
+* Cloudinary integration for:
+
+  * Automatic image/video optimization
+  * Dynamic resizing
+  * CDN-based fast delivery
+
+---
+
+## 🔗 API Endpoints (v1)
+
+* `/api/v1/users` – Authentication & profiles
+* `/api/v1/videos` – Video CRUD & discovery
+* `/api/v1/subscriptions` – Channel subscriptions
+* `/api/v1/comments` – Video comments
+* `/api/v1/likes` – Like / dislike system
+* `/api/v1/playlist` – Playlist management
+* `/api/v1/tweets` – Creator updates
+* `/api/v1/dashboard` – Creator analytics
+* `/api/v1/healthcheck` – System status
+
+---
+
+## 🔮 Future Roadmap
+
+* Real-time notifications using Socket.io
+* Video recommendation algorithms
+* Category and tag-based discovery
+* Multi-tier subscription models
